@@ -12,10 +12,9 @@ essais = 0
 mot_essais = ""
 import random
 random_number = random.randint(0, 100)
-print(random_number)
-"""
+#print(random_number)
 
-"""    
+   
 while int(user_input) != random_number:
     user_input = input("Enter a number : ")
     try:
