@@ -6,57 +6,75 @@ Display the conversion results in the browser console.
 The program should not quit as long as the user wants to continue converting values.
 If the user chooses a conversion that is not supported, display that in the console.
 */
-var asking = prompt("Enter the currency you want to be changed : ");
-var userInput = asking; 
-var converting = prompt("Enter the amount you would to be changed : ");
-var valeur = Number(converting);
 
-
-
-function dollarsConverter(){
-    var converting = prompt("Enter the amount you would to be changed : ");
-    var swissFrancs = valeur*1.023;
-    var result = valeur + " dollars are " + swissFrancs + " swiss francs.";
-    var message = converting + result;
-    return message ;
-}
-dollarsConverter();
-
-function eurosConverter(){
-    
-    var swissFrancs = valeur*1.289;
-    var message = valeur + " euros are " + swissFrancs + " swiss francs.";
-    return message;
-}
-eurosConverter();
-
-function livresConverter(){
-    var swissFrancs = valeur*2.45;
-    var message = valeur + " livres are " + swissFrancs + " swiss francs.";
-    return message;
-}
-livresConverter();
-
-if (userInput == "dollars"){
-console.log (dollarsConverter);
+function dollarsConverter(dollars){
+    return dollars*1.023;
 }
 
-else if (userInput == "euros"){
-console.log(eurosConverter());
-}
-
-else if (userInput == "livres"){
-console.log(livresConverter());
-}   
-
-else{
-console.log("This currency is not available");
+function eurosConverter(euros){
+    return euros*1.289;    
 }
 
 
-var stopping = prompt("Do you need an other change ? : ")
-var yesNoAnswer = stopping;
-console.log(stopping);
+function livresConverter(livres){
+    return livres*2.45;     
+}
+
+
+
+// function : ask the user wants to convert something
+function askYesNo(){
+    var userInput = window.prompt("Do you want to use the converter ? (yes/no) ")
+    if (userInput == "yes" || "y") {
+      return true;
+    } else {
+      quit();
+    }
+}
+// function : ask which conversion
+function askConversion() {
+    var userInput = window.prompt("Which conversion ? (dollars/euros/livres) ");
+    return userInput;
+}
+
+// function : ask a value
+function askValue() {
+    var userInput = window.prompt("Enter a value : ");
+    return userInput; 
+}
+
+// Main :
+// - continue while the user wants to convert values
+// - check which conversion
+// - Get the value 
+// - Display the result
+
+
+while (askYesNo()){
+    var conversionType = askConversion();
+    var conversionValue = askValue();
+    var resultMessage = "The result is ";
+
+    if (conversionType == "dollars"){
+        resultMessage += dollarsConverter(Number(conversionValue)).toString();
+    }
+      else if (conversionType == "euros"){
+        resultMessage += eurosConverter(Number(conversionValue)).toString();
+    } else if (conversionType == "livres"){
+        resultMessage += livresConverter(Number(conversionValue)).toString();
+    } else {
+        resultMessage = "Sorry, this currency is not available."
+    }
+    console.log(resultMessage);
+}
+
+
+
+
+
+
+
+
 
 //si la réponse est oui, recommencer la boucle, si la réponse est non console.log ("merci et à bientôt")
 
